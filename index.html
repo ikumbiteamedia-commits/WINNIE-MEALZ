@@ -48,7 +48,7 @@ h1{font-size:28px;line-height:1.1;font-weight:700}h2{font-size:22px;font-weight:
 #tt{position:fixed;top:14px;left:50%;transform:translate(-50%,-80px);background:#fff;color:var(--ch);padding:10px 18px;border-radius:20px;font-weight:700;font-size:14px;z-index:99;transition:transform .5s var(--e)}#tt.on{transform:translate(-50%,0)}
 /* admin */
 #ad{display:none;width:100%;max-width:1180px;height:100%;background:var(--sg);color:var(--ch);border-radius:20px;overflow:hidden;animation:in .8s var(--e)}
-.adm #ad{display:flex}.adm #ph{display:none}
+.adm #ad{display:flex}#br{display:none;flex-direction:column;align-items:center;text-align:center;gap:16px;max-width:600px;padding:20px;animation:in .8s var(--e)}#br h1{font-size:34px}.brg #br{display:flex}.brg #ph{display:none}.adm #ph{display:none}
 #sb{width:200px;background:var(--ob);color:#9aa49f;padding:20px 12px;flex:none}#sb button{display:block;width:100%;text-align:left;padding:11px 14px;border-radius:12px;font-weight:600;position:relative;margin-top:2px}#sb .on{color:#fff;background:#1b211e}#sb .on:before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:2px;background:var(--g)}
 #am{flex:1;overflow:auto;padding:24px}#am h1{margin-bottom:16px;font-size:26px}
 .st4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}.stat{background:#fff;border-radius:18px;padding:16px}.stat b{font-size:26px;display:block}.stat span{color:var(--mu);font-weight:600;font-size:13px}
@@ -57,13 +57,13 @@ h1{font-size:28px;line-height:1.1;font-weight:700}h2{font-size:22px;font-weight:
 .tr{display:grid;grid-template-columns:1fr 1.2fr 1fr 1.3fr;gap:8px;padding:11px 8px;border-bottom:1px solid var(--sg);font-weight:600;font-size:14px;align-items:center;cursor:pointer;border-radius:10px}.tr:hover,.tr.on{background:var(--sg)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.tabs button{padding:8px 14px;border-radius:18px;background:#fff;font-weight:600;font-size:13px}.tabs .on{background:var(--ob);color:#fff}
 .bar{transform-origin:bottom;transform:scaleY(0);animation:grow .9s var(--e) forwards}@keyframes grow{to{transform:scaleY(1)}}
-.ab{padding:11px 16px;border-radius:14px;background:var(--g);color:#fff;font-weight:700;margin:4px 6px 0 0}.ab.s{background:var(--ob)}
+.ab{padding:11px 16px;border-radius:14px;background:var(--g);color:#fff;font-weight:700;margin:4px 6px 0 0}.ab.k{background:var(--ob)}
 @media(max-width:700px){#sb{display:none}.adm #hd{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
 </style></head><body>
 <div id="st"><div id="hd">WINNIE MEALS<small id="sub">Prototype · Customer Experience</small></div>
 <div id="mid"><div id="ph"><div id="sc"></div></div>
-<div id="ad"><div id="sb"></div><div id="am"></div></div></div>
+<div id="br"><div class="row" style="gap:10px;justify-content:center;font-weight:700"><span class="chip on">Customer experience</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06C755" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="chip" style="background:#1b211e;color:#fff">Business operations</span></div><h1>This is how you will be tracking and managing your store.</h1><p style="color:#9aa49f;font-size:16px">Every order, payment, product and delivery your customers create appears here in real time.</p><button class="btn" style="width:auto;padding:16px 34px;margin-top:8px" data-a="go">Open the dashboard</button></div><div id="ad"><div id="sb"></div><div id="am"></div></div></div>
 <div id="cn"><button id="bk">← Back</button><span id="pg"></span><button id="nx">Next →</button></div></div>
 <div id="tt"></div>
 <script>
@@ -116,7 +116,7 @@ const O=[['#WM10248','John Doe',1060,'Preparing','M-Pesa','Paid'],['#WM10247','S
 O[0][2]=670;const FL=['New','Preparing','Ready','On delivery','Delivered'];let sel=0,tab='All';
 const st=s=>`<span class="tag ${s=='Delivered'||s=='Paid'?'tp':s=='Payment due'||s=='New'?'tw':'tb'}">${s}</span>`;
 const orderRows=()=>O.filter(o=>tab=='All'||o[3]==tab).map(o=>`<div class="tr ${O[sel]==o?'on':''}" data-a="os" data-k="${O.indexOf(o)}"><b>${o[0]}</b><span>${o[1]}</span><span>${K(o[2])}</span><span>${st(o[3])} ${st(o[5])}</span></div>`).join('')||'<p style="padding:20px">No orders in this stage.</p>';
-const detail=()=>{const o=O[sel],n=FL.indexOf(o[3]);return`<div class="pn"><h2>${o[0]} · ${o[1]}</h2><p>0712 345 678 · Thika Road, Nairobi</p><div class="row" style="margin:10px 0;font-weight:600"><span>Classic Burger × 1<br>Fries × 1</span><span>${K(o[2])}<br>${o[4]} ${st(o[5])}</span></div><div class="tl">${['Received','Preparing','Ready','Out for delivery','Delivered'].map((t,j)=>`<div class="${j<=n+(n>0?0:0)&&j<=n+0?'d':''}${j<=n?' d':''}"><i>${j<=n?X.ck:''}</i>${t}</div>`).join('')}</div><button class="ab" data-a="adv" data-k="2">Mark as ready</button><button class="ab s" data-a="adv" data-k="3">Send to delivery</button><button class="ab s" data-a="adv" data-k="4">Mark delivered</button></div>`};
+const detail=()=>{const o=O[sel],n=FL.indexOf(o[3]);return`<div class="pn"><h2>${o[0]} · ${o[1]}</h2><p>0712 345 678 · Thika Road, Nairobi</p><div class="row" style="margin:10px 0;font-weight:600"><span>Classic Burger × 1<br>Fries × 1</span><span>${K(o[2])}<br>${o[4]} ${st(o[5])}</span></div><div class="tl">${['Received','Preparing','Ready','Out for delivery','Delivered'].map((t,j)=>`<div class="${j<=n+(n>0?0:0)&&j<=n+0?'d':''}${j<=n?' d':''}"><i>${j<=n?X.ck:''}</i>${t}</div>`).join('')}</div><button class="ab" data-a="adv" data-k="2">Mark as ready</button><button class="ab k" data-a="adv" data-k="3">Send to delivery</button></div>`};
 const bars=[40,62,48,80,66,95,72],AD={
 a0:()=>`<h1>Overview</h1><div class="st4">${[['KSh 184,500',"Today's sales"],['248','Orders'],['1,842','Customers'],['17','Active deliveries']].map(a=>`<div class="stat"><b>${a[0]}</b><span>${a[1]}</span></div>`).join('')}</div><div class="two"><div class="pn"><h2>Sales overview</h2><svg viewBox="0 0 280 130" width="100%">${bars.map((b,i)=>`<rect class="bar" style="animation-delay:${i*.08}s" x="${10+i*38}" y="${120-b}" width="26" height="${b}" rx="7" fill="${i==5?'#06C755':'#cfe9d9'}"/>`).join('')}</svg><p style="font-size:12px">Avg order KSh 744 · On-time delivery 94%</p></div><div class="pn"><h2>Payment split</h2>${[['M-Pesa',62],['Card',23],['Pay on delivery',15]].map(p=>`<div style="margin:8px 0;font-weight:600;font-size:13px">${p[0]} — ${p[1]}%<div style="height:8px;background:var(--sg);border-radius:6px;margin-top:4px"><div class="bar" style="height:8px;width:${p[1]}%;background:var(--g);border-radius:6px;transform-origin:left;animation-name:gr"></div></div></div>`).join('')}</div></div><div class="pn"><h2>Live orders</h2>${orderRows()}</div><style>@keyframes gr{from{transform:scaleX(0)}to{transform:scaleX(1)}}</style>`,
 a1:()=>`<h1>Orders</h1><div class="tabs">${['All','New','Preparing','Ready','On delivery','Delivered'].map(t=>`<button class="${t==tab?'on':''}" data-a="tab" data-k="${t}">${t}</button>`).join('')}</div><div class="two"><div class="pn">${orderRows()}</div>${detail()}</div>`,
@@ -126,10 +126,11 @@ a4:()=>`<h1>Customers</h1><div class="pn">${[['John Doe','0712 345 678',12,'8,45
 a5:()=>`<h1>Payments &amp; Revenue</h1><div class="st4">${[['KSh 156,800','Total collected'],['KSh 27,700','Pending cash'],['KSh 3,200','Refunds'],['KSh 120,100','M-Pesa']].map(a=>`<div class="stat"><b style="font-size:21px">${a[0]}</b><span>${a[1]}</span></div>`).join('')}</div><div class="pn"><h2>Transactions</h2>${O.map(o=>`<div class="tr"><b>${o[0]}</b><span>${o[4]}</span><span>${K(o[2])}</span>${st(o[5])}</div>`).join('')}</div>`,
 a6:()=>`<h1>Delivery</h1><div class="two"><div class="pn">${mapSvg(380,320).replace('id="mp"','').replace(/id="(rt|rv|sco|hm|hi)"/g,'')}</div><div class="pn"><h2>Active riders</h2>${[['Kevin','#WM10247','6 min'],['Brian','#WM10248','11 min'],['Mercy','#WM10250','18 min']].map(r=>`<div class="tr" style="grid-template-columns:1fr 1fr 1fr" data-a="t" data-m="Rider ${r[0]} selected"><b>${X.sc} ${r[0]}</b><span>${r[1]}</span><span>${r[2]}</span></div>`).join('')}</div></div>`};
 /* engine */
-const ST=['splash','welcome','signup','done','home','product','cart','checkout','pay','wait','success','pod','t18','t10','t5','t0','delivered','a0','a1','a2','a3','a4','a5','a6'],AN=['Overview','Orders','Order #WM10248','Products','Customers','Payments','Delivery'];
+const ST=['splash','welcome','signup','done','home','product','cart','checkout','pay','wait','success','pod','t18','t10','t5','t0','delivered','bridge','a0','a1','a2','a3','a4','a5','a6'],AN=['Overview','Orders','Order #WM10248','Products','Customers','Payments','Delivery'];
 const phn=k=>k[0]=='t'&&k.length<4?'track':k=='wait'?'pay':k;
-function draw(back){const k=ST[S.i],a=k[0]=='a';clearTimeout(S.w);if(k=='wait')S.w=setTimeout(()=>{if(ST[S.i]=='wait')go(1)},3500);document.body.classList.toggle('adm',a);$('#sub').textContent=a?'Operations Dashboard':'Prototype · Customer Experience';$('#pg').textContent=`Step ${String(S.i+1).padStart(2,'0')} / ${ST.length}`;
-if(a){const n=S.i-17;$('#sb').innerHTML=logo(34)+'<p style="color:#fff;font-weight:700;margin:6px 0 16px">WINNIE MEALS</p>'+[['Overview',0],['Orders',1],['Products',3],['Customers',4],['Payments',5],['Delivery',6],['Reports',0],['Settings',0]].map(x=>`<button class="${(n==x[1]||(n==2&&x[1]==1))&&x[0]!='Reports'&&x[0]!='Settings'?'on':''}" data-a="adm" data-k="${x[1]}" data-m="${x[0]}">${x[0]}</button>`).join('');$('#am').innerHTML=AD['a'+n]();return}
+function draw(back){const k=ST[S.i],a=k[0]=='a';clearTimeout(S.w);if(k=='wait')S.w=setTimeout(()=>{if(ST[S.i]=='wait')go(1)},3500);document.body.classList.toggle('adm',a);document.body.classList.toggle('brg',k=='bridge');$('#sub').textContent=a?'Operations Dashboard':'Prototype · Customer Experience';$('#pg').textContent=`Step ${String(S.i+1).padStart(2,'0')} / ${ST.length}`;
+if(k=='bridge')return;
+if(a){const n=S.i-18;$('#sb').innerHTML=logo(34)+'<p style="color:#fff;font-weight:700;margin:6px 0 16px">WINNIE MEALS</p>'+[['Overview',0],['Orders',1],['Products',3],['Customers',4],['Payments',5],['Delivery',6],['Reports',0],['Settings',0]].map(x=>`<button class="${(n==x[1]||(n==2&&x[1]==1))&&x[0]!='Reports'&&x[0]!='Settings'?'on':''}" data-a="adm" data-k="${x[1]}" data-m="${x[0]}">${x[0]}</button>`).join('');$('#am').innerHTML=AD['a'+n]();return}
 const sc=$('#sc'),pv=sc.querySelector('.s'),pk=sc.dataset.k,nk=phn(k);
 if(k[0]=='t'&&k.length<4&&pk=='track'&&$('#tkx')){$('#tkx').outerHTML=trk(k);mv(TR[k][0]);return}
 if(pk==nk&&nk=='pay'){sc.innerHTML=SC.pay(k=='wait');return}
@@ -149,7 +150,7 @@ else if(a=='x'){S[k]=!S[k]?1:0;draw()}
 else if(a=='cat'){S.cat=k;draw()}
 else if(a=='pm'){if(+k){S.i=8;draw()}else{S.i=11;draw()}}
 else if(a=='nav'){const m2={home:4,cart:6,orders:null,profile:null}[k];m2?(S.i=m2,draw()):toast((k=='orders'?'No orders yet — your first order will appear here':'Profile: John Doe · 0712 345 678'))}
-else if(a=='adm'){if(m=='Reports'||m=='Settings')toast(m+' view is outside this prototype');else{S.i=17+ +k;draw()}}
+else if(a=='adm'){if(m=='Reports'||m=='Settings')toast(m+' view is outside this prototype');else{S.i=18+ +k;draw()}}
 else if(a=='tab'){tab=k;draw()}else if(a=='os'){sel=+k;draw()}
 else if(a=='adv'){const o=O[sel];if(FL.indexOf(o[3])<+k){o[3]=FL[+k];if(+k==4)o[5]='Paid';toast(o[0]+' → '+o[3])}draw()}});
 $('#nx').onclick=()=>go(1);$('#bk').onclick=()=>go(-1);
